@@ -32,26 +32,47 @@ public class CustomerService
 
     public async Task<Customer> UpdateCustomerAsync(string id, Customer customer)
     {
-        if (_context.Customers.Any(x => x.CustomerID == id))
+        try
         {
-            _context.Entry(customer).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return customer;
+            if (_context.Customers.Any(x => x.CustomerID == id))
+            {
+                _context.Entry(customer).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+                return customer;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error occured when updating customer: {e.Message}");
+            throw;
         }
 
-        return null;
     }
 
     public async Task<bool> DeleteCustomerAsync(string id)
     {
-        var customer = await _context.Customers.FindAsync(id);
-        if (customer == null)
+        try
         {
-            return false;
+            var customer = await _context.Customers.FindAsync(id);
+            if (customer == null)
+            {
+                return false;
+            }
+            else
+            {
+                _context.Customers.Remove(customer);
+                await _context.SaveChangesAsync();
+                return true;
+            }
         }
-
-        _context.Customers.Remove(customer);
-        await _context.SaveChangesAsync();
-        return true;
+        catch (Exception e)
+        {
+            Console.WriteLine($"Error occured when delete customer {e.Message}");
+            throw;
+        }
     }
 }
