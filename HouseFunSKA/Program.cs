@@ -12,7 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string connectionString = "Data Source=TI03NB289;Initial Catalog=master;User ID=sa;Password=Shawn0316";
+var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+var connectionString = configuration.GetConnectionString("DefaultConnectString");
 builder.Services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<CustomerService>();
 

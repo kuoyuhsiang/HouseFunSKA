@@ -6,3 +6,5 @@ riderModule.iml
 .vs/
 indexLayout.xml
 vcs.xml
+appsettings.json
+appsettings.Development.json
