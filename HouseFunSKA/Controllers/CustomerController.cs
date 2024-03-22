@@ -24,7 +24,7 @@ namespace HouseFunSKA.Controllers
         [HttpGet("id")]
         public async Task<ActionResult<Customer>> GetCustomerById(string id)
         {
-            var customer = await _customerService.GetCustomerIdAsync(id);
+            var customer = await _customerService.GetCustomerByIdAsync(id);
             if (customer == null)
             {
                 return NotFound();
