@@ -1,5 +1,6 @@
 using HouseFunSKA.Models;
 using HouseFunSKA.Services;
+using HouseFunSKA.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HouseFunSKA.Controllers
@@ -8,7 +9,7 @@ namespace HouseFunSKA.Controllers
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
-        private readonly CustomerService _customerService;
+        private readonly ICustomerService _customerService;
 
         public CustomerController(CustomerService customerService)
         {
@@ -41,9 +42,9 @@ namespace HouseFunSKA.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Customer>> UpdateCustomer(string id, Customer customer)
+        public async Task<ActionResult<Customer>> UpdateCustomer(Customer customer, string id)
         {
-            var updatedCustomer = await _customerService.UpdateCustomerAsync(id, customer);
+            var updatedCustomer = await _customerService.UpdateCustomerAsync(customer, id);
             if (updatedCustomer == null)
             {
                 return NotFound();

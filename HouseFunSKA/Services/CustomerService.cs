@@ -1,10 +1,11 @@
 using HouseFunSKA.Data;
 using HouseFunSKA.Models;
+using HouseFunSKA.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseFunSKA.Services;
 
-public class CustomerService
+public class CustomerService : ICustomerService
 {
     private readonly NorthwindContext _context;
 
@@ -30,7 +31,7 @@ public class CustomerService
         return customer;
     }
 
-    public async Task<Customer> UpdateCustomerAsync(string id, Customer customer)
+    public async Task<Customer> UpdateCustomerAsync(Customer customer, string id)
     {
         try
         {
