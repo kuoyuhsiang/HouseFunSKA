@@ -1,5 +1,8 @@
 using HouseFunSKA.Data;
+using HouseFunSKA.Repositories;
+using HouseFunSKA.Repositories.Interface;
 using HouseFunSKA.Services;
+using HouseFunSKA.Services.Interface;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -15,7 +18,8 @@ builder.Services.AddSwaggerGen();
 var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var connectionString = configuration.GetConnectionString("DefaultConnectString");
 builder.Services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
-builder.Services.AddScoped<CustomerService>();
+builder.Services.AddScoped<ICustomerService, CustomerService>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 var app = builder.Build();
 
