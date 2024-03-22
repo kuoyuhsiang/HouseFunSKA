@@ -1,10 +1,11 @@
 using HouseFunSKA.Data;
 using HouseFunSKA.Models;
+using HouseFunSKA.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace HouseFunSKA.Repositories;
 
-public class CustomerRepository
+public class CustomerRepository : ICustomerRepository
 {
     private readonly NorthwindContext _context;
     
