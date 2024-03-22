@@ -4,10 +4,10 @@ namespace HouseFunSKA.Services.Interface;
 
 public interface ICustomerService
 {
-    Task<List<Customer>> GetCustomerAsync();
-    Task<Customer> GetCustomerByIdAsync(string id);
-    Task<Customer> CreateCustomerAsync(Customer customer);
-    Task<Customer> UpdateCustomerAsync(Customer customer, string id);
-    Task<bool> DeleteCustomerAsync(string id);
+    Task<List<Customer>> GetCustomer();
+    Task<Customer> GetCustomerById(string id);
+    Task<Customer> CreateCustomer(Customer customer);
+    Task<Customer> UpdateCustomer(Customer customer, string id);
+    Task<bool> DeleteCustomer(string id);
 
 }

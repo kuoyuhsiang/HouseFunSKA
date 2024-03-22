@@ -19,13 +19,13 @@ namespace HouseFunSKA.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Customer>>> GetCustomer()
         {
-            return Ok(await _customerService.GetCustomerAsync());
+            return Ok(await _customerService.GetCustomer());
         }
 
         [HttpGet("id")]
         public async Task<ActionResult<Customer>> GetCustomerById(string id)
         {
-            var customer = await _customerService.GetCustomerByIdAsync(id);
+            var customer = await _customerService.GetCustomerById(id);
             if (customer == null)
             {
                 return NotFound();
@@ -37,14 +37,14 @@ namespace HouseFunSKA.Controllers
         [HttpPost]
         public async Task<ActionResult<Customer>> CreateCustomer(Customer customer)
         {
-            var createdCustomer = await _customerService.CreateCustomerAsync(customer);
+            var createdCustomer = await _customerService.CreateCustomer(customer);
             return CreatedAtAction(nameof(GetCustomerById), new { id = createdCustomer.CustomerID }, createdCustomer);
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Customer>> UpdateCustomer(Customer customer, string id)
         {
-            var updatedCustomer = await _customerService.UpdateCustomerAsync(customer, id);
+            var updatedCustomer = await _customerService.UpdateCustomer(customer, id);
             if (updatedCustomer == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace HouseFunSKA.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Customer>> DeleteCustomer(string id)
         {
-            var deletedCustomer = await _customerService.DeleteCustomerAsync(id);
+            var deletedCustomer = await _customerService.DeleteCustomer(id);
             if (!deletedCustomer)
             {
                 return NotFound();
