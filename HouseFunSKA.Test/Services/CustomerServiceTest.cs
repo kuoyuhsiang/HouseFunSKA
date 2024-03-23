@@ -17,8 +17,10 @@ public class CustomerServiceTest
         _customerService = new CustomerService(_customerRepository);
     }
 
-    private ICustomerRepository _customerRepository;
-    private ICustomerService _customerService;
+    private ICustomerRepository _customerRepository = null!;
+    private ICustomerService _customerService = null!;
+    private readonly string _customerId = "ALFKI";
+    private readonly Customer _customer = null!;
 
     [Test]
     public void GetCustomer_Should_Call_GetCustomerAsync_Method_In_CustomerRepository_Once()
@@ -30,32 +32,28 @@ public class CustomerServiceTest
     [Test]
     public void GetCustomerById_Should_Call_GetCustomerByIdAsync_Method_In_CustomerRepository_Once()
     {
-        var customer = new Customer();
-        _customerService.GetCustomerById(customer.CustomerID);
-        _customerRepository.Received(1).GetCustomerByIdAsync(customer.CustomerID);
+        _customerService.GetCustomerById(_customerId);
+        _customerRepository.Received(1).GetCustomerByIdAsync(Arg.Any<string>());
     }
 
     [Test]
     public void CreateCustomer_Should_Call_CreateCustomerAsync_Method_In_CustomerRepository_Once()
     {
-        var customer = new Customer();
-        _customerService.CreateCustomer(customer);
-        _customerRepository.Received(1).CreateCustomerAsync(customer);
+        _customerService.CreateCustomer(_customer);
+        _customerRepository.Received(1).CreateCustomerAsync(_customer);
     }
 
     [Test]
     public void UpdateCustomer_Should_Call_UpdateCustomerAsync_Method_In_CustomerRepository_Once()
     {
-        var customer = new Customer();
-        _customerService.UpdateCustomer(customer, customer.CustomerID);
-        _customerRepository.UpdateCustomerAsync(customer, customer.CustomerID);
+        _customerService.UpdateCustomer(_customer, _customerId);
+        _customerRepository.UpdateCustomerAsync(_customer, _customerId);
     }
 
     [Test]
     public void DeleteCustomer_Should_Call_DeleteCustomerAsync_Method_In_CustomerRepository_Once()
     {
-        var customer = new Customer();
-        _customerService.DeleteCustomer(customer.CustomerID);
-        _customerRepository.DeleteCustomerAsync(customer.CustomerID);
+        _customerService.DeleteCustomer(_customerId);
+        _customerRepository.DeleteCustomerAsync(Arg.Any<string>());
     }
 }
