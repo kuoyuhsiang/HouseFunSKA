@@ -1,5 +1,4 @@
 using HouseFunSKA.Models;
-using HouseFunSKA.Services;
 using HouseFunSKA.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
 

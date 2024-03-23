@@ -4,7 +4,6 @@ using HouseFunSKA.Repositories.Interface;
 using HouseFunSKA.Services;
 using HouseFunSKA.Services.Interface;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
