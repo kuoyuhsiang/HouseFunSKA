@@ -1,5 +1,6 @@
-using HouseFunSKA.Data;
-using HouseFunSKA.Repositories;
+using HouseFunSKA.Repositories.Interface;
+using HouseFunSKA.Services;
+using HouseFunSKA.Services.Interface;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -11,14 +12,17 @@ public class CustomerServiceTest
     [SetUp]
     public void SetUp()
     {
-        _northwindContext = Substitute.For<NorthwindContext>();
+        _customerRepository = Substitute.For<ICustomerRepository>();
+        _customerService = new CustomerService(_customerRepository);
     }
 
-    private NorthwindContext _northwindContext;
+    private ICustomerRepository _customerRepository;
+    private ICustomerService _customerService;
 
     [Test]
     public void GetCustomer_Should_Call_GetCustomerAsync_Method_In_CustomerRepository_Once()
     {
-        var customerRepository = new CustomerRepository(_northwindContext);
+        _customerService.GetCustomer();
+        _customerRepository.Received(1).GetCustomerAsync();
     }
 }
